@@ -1,0 +1,28 @@
+
+name: Análisis de Código con Snyk
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  snyk-code-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Snyk CLI
+      run: npm install -g snyk
+
+    - name: Run Snyk Code Analysis
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: snyk code test
