@@ -2,6 +2,9 @@
 name: Análisis de Código con Snyk
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
